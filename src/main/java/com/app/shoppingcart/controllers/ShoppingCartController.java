@@ -12,7 +12,7 @@ import java.util.Optional;
 @RequestMapping(value = "/cart")
 public class ShoppingCartController  {
 
-    private AppFacade appFacade;
+    private final AppFacade appFacade;
 
     @PostMapping
     public ShoppingCart createCart(@RequestBody ShoppingCart shoppingCart) {
