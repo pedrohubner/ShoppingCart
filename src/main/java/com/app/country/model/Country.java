@@ -1,4 +1,4 @@
-package com.app.client;
+package com.app.country.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,10 +13,10 @@ import javax.persistence.Id;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-class Country {
+public class Country {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 }
