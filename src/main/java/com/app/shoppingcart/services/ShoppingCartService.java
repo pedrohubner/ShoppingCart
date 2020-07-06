@@ -11,7 +11,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class ShoppingCartService {
 
-    private ShoppingCartRepository shoppingCartRepository;
+    private final ShoppingCartRepository shoppingCartRepository;
 
     public ShoppingCart createShoppingCart(ShoppingCart shoppingCart) {
         return shoppingCartRepository.save(shoppingCart);
