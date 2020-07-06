@@ -14,9 +14,9 @@ import java.util.Optional;
 @AllArgsConstructor
 public class AppFacade {
 
-    private ProductService productService;
-    private ShoppingCartService shoppingCartService;
-    private ShoppingCartProductsService shoppingCartProductsService;
+    private final ProductService productService;
+    private final ShoppingCartService shoppingCartService;
+    private final ShoppingCartProductsService shoppingCartProductsService;
 
     public Product createProduct(Product product) {
         return productService.createProduct(product);
