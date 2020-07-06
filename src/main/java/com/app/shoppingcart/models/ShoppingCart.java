@@ -2,24 +2,26 @@ package com.app.shoppingcart.models;
 
 import com.app.client.Client;
 import com.app.product.models.Product;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
 @Entity
 public class ShoppingCart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private final Long id;
     @OneToOne
-    private Client client;
+    private final Client client;
     @OneToMany
-    private List<Product> productsList;
+    private final List<Product> productsList;
+
+    public ShoppingCart(Long id, Client client, List<Product> productsList) {
+        this.id = id;
+        this.client = client;
+        this.productsList = productsList;
+    }
 }
