@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = "/shopcart")
+@RequestMapping(value = "/cart")
 public class ShoppingCartProductsController {
 
     private final AppFacade appFacade;
 
-    @GetMapping(value = "/cart/{cartId}/product/{productId}")
-    public ShoppingCart addProductToShoppingCart(@PathVariable Long productId, Long cartId) {
-        return appFacade.addProductToShoppingCart(productId, cartId);
+    @GetMapping(value = "/{cartId}/product/{productId}")
+    public ShoppingCart addProductToShoppingCart(@PathVariable Long cartId, @PathVariable Long productId) {
+        return appFacade.addProductToShoppingCart(cartId, productId);
     }
 }
