@@ -1,7 +1,8 @@
 package com.app.shoppingcart.models;
 
-import com.app.client.Client;
+import com.app.client.models.Client;
 import com.app.product.models.Product;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Getter
 @Entity
+@AllArgsConstructor
 public class ShoppingCart {
 
     @Id
@@ -18,10 +20,4 @@ public class ShoppingCart {
     private final Client client;
     @OneToMany
     private final List<Product> productsList;
-
-    public ShoppingCart(Long id, Client client, List<Product> productsList) {
-        this.id = id;
-        this.client = client;
-        this.productsList = productsList;
-    }
 }
