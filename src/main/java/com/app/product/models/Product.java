@@ -1,21 +1,23 @@
 package com.app.product.models;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Getter
-@Entity
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
+@Entity
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private final Long id;
-    private final String name;
-    private final Double value;
+    private Long id;
+    private String name;
+    private Double value;
 }
