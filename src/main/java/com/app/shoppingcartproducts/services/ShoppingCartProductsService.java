@@ -8,37 +8,29 @@ import com.app.shoppingcart.services.ShoppingCartService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 @AllArgsConstructor
 public class ShoppingCartProductsService {
 
-    private ShoppingCartRepository shoppingCartRepository;
-    private ShoppingCartService shoppingCartService;
-    private ProductService productService;
+    private final ShoppingCartRepository shoppingCartRepository;
+    private final ShoppingCartService shoppingCartService;
+    private final ProductService productService;
 
-    public Product getProduct(Long productId) {
-        Optional<Product> product = productService.findProductById(productId);
-        if (product.isEmpty()) {
-            throw new RuntimeException("Produto não encontrado.");
-        }
-        return product.get();
+    private Product getProduct(Long productId) {
+
+        return productService.findProductById(productId)
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
     }
 
-    public ShoppingCart getShoppingCart(Long cartId) {
-        Optional<ShoppingCart> shoppingCart = shoppingCartService.findShoppingCartById(cartId);
-        if (shoppingCart.isEmpty()) {
-            throw new RuntimeException("Carrinho não encontrado.");
-        }
-        return shoppingCart.get();
+    private ShoppingCart getShoppingCart(Long cartId) {
+
+        return shoppingCartService.findShoppingCartById(cartId)
+                .orElseThrow(() -> new RuntimeException("Carrinho não encontrado"));
     }
 
-    public ShoppingCart addProductToShoppingCart(Long productId, Long shoppingCartId) {
-        ShoppingCart sc = new ShoppingCart();
-        sc.getProductsList().add(getProduct(productId));
-        sc = getShoppingCart(shoppingCartId);
-        shoppingCartRepository.save(sc);
-        return sc;
+    public ShoppingCart addProductToShoppingCart(Long cartId, Long productId) {
+        ShoppingCart s = getShoppingCart(cartId);
+        s.getProductsList().add(getProduct(productId));
+        return shoppingCartRepository.save(s);
     }
 }

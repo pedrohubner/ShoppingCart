@@ -1,4 +1,4 @@
-package com.app.product.models;
+package com.app.country.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,14 +10,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
-public class Product {
+@NoArgsConstructor
+@AllArgsConstructor
+public class Country {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private Double value;
 }

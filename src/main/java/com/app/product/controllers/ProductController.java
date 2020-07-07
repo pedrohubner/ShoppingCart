@@ -12,7 +12,7 @@ import java.util.Optional;
 @RequestMapping(value = "/product")
 public class ProductController {
 
-    private AppFacade appFacade;
+    private final AppFacade appFacade;
 
     @PostMapping
     public Product createProduct(@RequestBody Product product) {
