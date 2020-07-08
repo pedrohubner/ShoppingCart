@@ -1,6 +1,6 @@
 package com.app.shoppingcart.models;
 
-import com.app.client.models.Client;
+import com.app.client.Client;
 import com.app.product.models.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
