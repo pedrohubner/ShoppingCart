@@ -13,7 +13,7 @@ import java.util.concurrent.Semaphore;
 
 @Component
 @AllArgsConstructor
-public class ShoppingCartFacade {
+public class AppFacade {
 
     private final Semaphore semaphore = new Semaphore(2);
     private final ProductService productService;
@@ -50,5 +50,9 @@ public class ShoppingCartFacade {
 
     public ShoppingCart addProductToShoppingCart(Long cartId, Long productId) {
         return new CartThread(semaphore, shoppingCartProductsService, productId, cartId).getShoppingCart();
+    }
+
+    public ShoppingCart removeProductFromShoppingCart(Long cartId, Long productId) {
+        return shoppingCartProductsService.removeProductFromShoppingCart(cartId, productId);
     }
 }
