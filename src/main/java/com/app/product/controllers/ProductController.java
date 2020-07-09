@@ -1,6 +1,6 @@
 package com.app.product.controllers;
 
-import com.app.AppFacade;
+import com.app.ShoppingCartFacade;
 import com.app.product.models.Product;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -12,25 +12,25 @@ import java.util.Optional;
 @RequestMapping(value = "/product")
 public class ProductController {
 
-    private final AppFacade appFacade;
+    private final ShoppingCartFacade shoppingCartFacade;
 
     @PostMapping
     public Product createProduct(@RequestBody Product product) {
-        return appFacade.createProduct(product);
+        return shoppingCartFacade.createProduct(product);
     }
 
     @GetMapping(value = "/{id}")
     public Optional<Product> findProduct(@PathVariable Long id) {
-        return appFacade.findProductById(id);
+        return shoppingCartFacade.findProductById(id);
     }
 
     @DeleteMapping
     public void deleteAllProduct() {
-        appFacade.deleteAllProducts();
+        shoppingCartFacade.deleteAllProducts();
     }
 
     @DeleteMapping(value = "/{id}")
     public void deleteProduct(@PathVariable Long id) {
-        appFacade.deleteProductById(id);
+        shoppingCartFacade.deleteProductById(id);
     }
 }
