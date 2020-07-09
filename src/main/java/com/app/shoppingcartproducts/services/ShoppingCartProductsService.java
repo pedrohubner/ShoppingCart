@@ -2,6 +2,7 @@ package com.app.shoppingcartproducts.services;
 
 import com.app.product.exceptionhandler.ProductException;
 import com.app.product.models.Product;
+import com.app.product.repositories.ProductRepository;
 import com.app.product.services.ProductService;
 import com.app.shoppingcart.exceptionhandler.ShoppingCartException;
 import com.app.shoppingcart.models.ShoppingCart;
@@ -31,6 +32,12 @@ public class ShoppingCartProductsService {
     public ShoppingCart addProductToShoppingCart(Long cartId, Long productId) {
         ShoppingCart sc = getShoppingCart(cartId);
         sc.getProductsList().add(getProduct(productId));
+        return shoppingCartRepository.save(sc);
+    }
+
+    public ShoppingCart removeProductFromShoppingCart(Long cartId, Long productId) {
+        ShoppingCart sc = getShoppingCart(cartId);
+        sc.getProductsList().remove(getProduct(productId));
         return shoppingCartRepository.save(sc);
     }
 }
