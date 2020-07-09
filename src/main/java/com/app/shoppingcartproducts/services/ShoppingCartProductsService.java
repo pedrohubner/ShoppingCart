@@ -1,7 +1,9 @@
 package com.app.shoppingcartproducts.services;
 
+import com.app.product.exceptionhandler.ProductException;
 import com.app.product.models.Product;
 import com.app.product.services.ProductService;
+import com.app.shoppingcart.exceptionhandler.ShoppingCartException;
 import com.app.shoppingcart.models.ShoppingCart;
 import com.app.shoppingcart.repositories.ShoppingCartRepository;
 import com.app.shoppingcart.services.ShoppingCartService;
@@ -16,21 +18,19 @@ public class ShoppingCartProductsService {
     private final ShoppingCartService shoppingCartService;
     private final ProductService productService;
 
-    private Product getProduct(Long productId) {
-
+    public Product getProduct(Long productId) {
         return productService.findProductById(productId)
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+                .orElseThrow(() -> new ProductException("Produto não encontrado"));
     }
 
-    private ShoppingCart getShoppingCart(Long cartId) {
-
+    public ShoppingCart getShoppingCart(Long cartId) {
         return shoppingCartService.findShoppingCartById(cartId)
-                .orElseThrow(() -> new RuntimeException("Carrinho não encontrado"));
+                .orElseThrow(() -> new ShoppingCartException("Carrinho não encontrado"));
     }
 
     public ShoppingCart addProductToShoppingCart(Long cartId, Long productId) {
-        ShoppingCart s = getShoppingCart(cartId);
-        s.getProductsList().add(getProduct(productId));
-        return shoppingCartRepository.save(s);
+        ShoppingCart sc = getShoppingCart(cartId);
+        sc.getProductsList().add(getProduct(productId));
+        return shoppingCartRepository.save(sc);
     }
 }
