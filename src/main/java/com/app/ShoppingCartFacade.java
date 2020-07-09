@@ -1,11 +1,5 @@
 package com.app;
 
-import com.app.adress.models.Address;
-import com.app.adress.services.AddressService;
-import com.app.client.models.Client;
-import com.app.client.services.ClientService;
-import com.app.country.model.Country;
-import com.app.country.services.CountryService;
 import com.app.product.models.Product;
 import com.app.product.services.ProductService;
 import com.app.shoppingcart.models.ShoppingCart;
@@ -15,14 +9,13 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+import java.util.concurrent.Semaphore;
 
 @Component
 @AllArgsConstructor
-public class AppFacade {
+public class ShoppingCartFacade {
 
-    private final ClientService clientService;
-    private final CountryService countryService;
-    private final AddressService addressService;
+    private final Semaphore semaphore = new Semaphore(2);
     private final ProductService productService;
     private final ShoppingCartService shoppingCartService;
     private final ShoppingCartProductsService shoppingCartProductsService;
@@ -56,18 +49,6 @@ public class AppFacade {
     }
 
     public ShoppingCart addProductToShoppingCart(Long cartId, Long productId) {
-        return shoppingCartProductsService.addProductToShoppingCart(cartId, productId);
-    }
-
-    public Client createClient(Client client) {
-        return clientService.createClient(client);
-    }
-
-    public Country createCountry(Country country) {
-        return countryService.createCountry(country);
-    }
-
-    public Address createAddress(Address address) {
-        return addressService.createAddress(address);
+        return new CartThread(semaphore, shoppingCartProductsService, productId, cartId).getShoppingCart();
     }
 }

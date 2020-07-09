@@ -1,6 +1,5 @@
-package com.app.adress.models;
+package com.app.client;
 
-import com.app.country.model.Country;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
