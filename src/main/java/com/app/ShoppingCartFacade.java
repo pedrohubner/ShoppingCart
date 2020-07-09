@@ -9,11 +9,13 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+import java.util.concurrent.Semaphore;
 
 @Component
 @AllArgsConstructor
-public class AppFacade {
+public class ShoppingCartFacade {
 
+    private final Semaphore semaphore = new Semaphore(2);
     private final ProductService productService;
     private final ShoppingCartService shoppingCartService;
     private final ShoppingCartProductsService shoppingCartProductsService;
@@ -47,6 +49,6 @@ public class AppFacade {
     }
 
     public ShoppingCart addProductToShoppingCart(Long cartId, Long productId) {
-        return shoppingCartProductsService.addProductToShoppingCart(cartId, productId);
+        return new CartThread(semaphore, shoppingCartProductsService, productId, cartId).getShoppingCart();
     }
 }
