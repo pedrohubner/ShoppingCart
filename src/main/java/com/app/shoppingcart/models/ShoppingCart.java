@@ -22,7 +22,7 @@ public class ShoppingCart {
     private Long id;
     @OneToOne
     private Client client;
-    @OneToMany
+    @ManyToMany
     @Fetch(FetchMode.JOIN)
     private List<Product> productsList;
 }
