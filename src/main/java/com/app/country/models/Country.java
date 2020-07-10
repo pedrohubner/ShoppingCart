@@ -1,4 +1,4 @@
-package com.app.client;
+package com.app.country.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

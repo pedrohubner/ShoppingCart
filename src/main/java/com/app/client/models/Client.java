@@ -1,5 +1,6 @@
-package com.app.client;
+package com.app.client.models;
 
+import com.app.address.models.Address;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,13 +11,13 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Address {
+public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String street;
-    private Integer number;
+    private String name;
+    private String document;
     @OneToOne
-    private Country country;
+    private Address address;
 }
