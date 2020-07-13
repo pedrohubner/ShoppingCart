@@ -9,11 +9,10 @@ public class CartThread implements Runnable{
 
     private final Long cartId;
     private final Long productId;
-    private ShoppingCart shoppingCart;
     private final Semaphore semaphore;
     private final ShoppingCartProductsService shoppingCartProductsService;
 
-    public CartThread(Semaphore semaphore, ShoppingCartProductsService shoppingCartProductsService, Long productId, Long cartId) {
+    CartThread(Semaphore semaphore, ShoppingCartProductsService shoppingCartProductsService, Long productId, Long cartId) {
         this.semaphore = semaphore;
         this.shoppingCartProductsService = shoppingCartProductsService;
         this.productId = productId;
@@ -30,9 +29,9 @@ public class CartThread implements Runnable{
 
             System.out.println(Thread.currentThread().getName() + " pegou a permissão");
 
-            Thread.sleep(10000);
+            Thread.sleep(1000);
 
-            shoppingCart = shoppingCartProductsService.addProductToShoppingCart(cartId, productId);
+            shoppingCartProductsService.addProductToShoppingCart(cartId, productId);
             System.out.println(Thread.currentThread().getName() + " foi executada");
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -40,9 +39,5 @@ public class CartThread implements Runnable{
             semaphore.release();
             System.out.println(Thread.currentThread().getName() + " liberou permissão");
         }
-    }
-
-    public ShoppingCart getShoppingCart() {
-        return shoppingCart;
     }
 }
