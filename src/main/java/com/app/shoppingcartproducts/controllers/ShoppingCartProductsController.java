@@ -1,6 +1,6 @@
 package com.app.shoppingcartproducts.controllers;
 
-import com.app.ShoppingCartFacade;
+import com.app.AppFacade;
 import com.app.shoppingcart.models.ShoppingCart;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -10,10 +10,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/cart")
 public class ShoppingCartProductsController {
 
-    private final ShoppingCartFacade shoppingCartFacade;
+    private final AppFacade appFacade;
 
-    @GetMapping(value = "/{cartId}/product/{productId}")
+    @PostMapping(value = "/{cartId}/product/{productId}")
     public ShoppingCart addProductToShoppingCart(@PathVariable Long cartId, @PathVariable Long productId) {
-        return shoppingCartFacade.addProductToShoppingCart(cartId, productId);
+        return appFacade.addProductToShoppingCart(cartId, productId);
+    }
+
+    @DeleteMapping(value = "/{cartId}/product/{productId}")
+    public ShoppingCart removeProductFromShoppingCart(@PathVariable Long cartId, @PathVariable Long productId) {
+        return appFacade.removeProductFromShoppingCart(cartId, productId);
     }
 }
