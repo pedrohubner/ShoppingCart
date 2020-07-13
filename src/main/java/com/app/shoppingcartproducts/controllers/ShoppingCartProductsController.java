@@ -14,7 +14,7 @@ public class ShoppingCartProductsController {
     private final AppFacade appFacade;
 
     @PostMapping(value = "/{cartId}/product/{productId}")
-    public ShoppingCart addProductToShoppingCart(@PathVariable Long cartId, @PathVariable Long productId) {
+    public CartThread addProductToShoppingCart(@PathVariable Long cartId, @PathVariable Long productId) {
         return appFacade.addProductToShoppingCart(cartId, productId);
     }
 

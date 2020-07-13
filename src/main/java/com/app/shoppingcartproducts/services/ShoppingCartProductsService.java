@@ -19,12 +19,12 @@ public class ShoppingCartProductsService {
     private final ShoppingCartService shoppingCartService;
     private final ProductService productService;
 
-    public Product getProduct(Long productId) {
+    private Product getProduct(Long productId) {
         return productService.findProductById(productId)
                 .orElseThrow(() -> new ProductException("Produto não encontrado"));
     }
 
-    public ShoppingCart getShoppingCart(Long cartId) {
+    private ShoppingCart getShoppingCart(Long cartId) {
         return shoppingCartService.findShoppingCartById(cartId)
                 .orElseThrow(() -> new ShoppingCartException("Carrinho não encontrado"));
     }

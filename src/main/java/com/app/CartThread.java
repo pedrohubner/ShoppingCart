@@ -12,7 +12,7 @@ public class CartThread implements Runnable{
     private final Semaphore semaphore;
     private final ShoppingCartProductsService shoppingCartProductsService;
 
-    public CartThread(Semaphore semaphore, ShoppingCartProductsService shoppingCartProductsService, Long productId, Long cartId) {
+    CartThread(Semaphore semaphore, ShoppingCartProductsService shoppingCartProductsService, Long productId, Long cartId) {
         this.semaphore = semaphore;
         this.shoppingCartProductsService = shoppingCartProductsService;
         this.productId = productId;
@@ -39,9 +39,5 @@ public class CartThread implements Runnable{
             semaphore.release();
             System.out.println(Thread.currentThread().getName() + " liberou permissão");
         }
-    }
-
-    public ShoppingCart getShoppingCart() {
-        return shoppingCartProductsService.addProductToShoppingCart(cartId, productId);
     }
 }
