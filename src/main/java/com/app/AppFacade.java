@@ -81,8 +81,8 @@ public class AppFacade {
         countryService.deleteCountryById(id);
     }
 
-    public ShoppingCart addProductToShoppingCart(Long cartId, Long productId) {
-        return new CartThread(semaphore, shoppingCartProductsService, productId, cartId).getShoppingCart();
+    public CartThread addProductToShoppingCart(Long cartId, Long productId) {
+        return new CartThread(semaphore, shoppingCartProductsService, productId, cartId);
     }
 
     public ShoppingCart removeProductFromShoppingCart(Long cartId, Long productId) {
