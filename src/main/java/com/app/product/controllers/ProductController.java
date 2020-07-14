@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = "/product")
+@RequestMapping(value = "/products")
 public class ProductController {
 
     private final AppFacade appFacade;
