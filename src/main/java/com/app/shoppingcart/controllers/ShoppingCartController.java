@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = "/cart")
+@RequestMapping(value = "/carts")
 public class ShoppingCartController {
 
     private final AppFacade appFacade;
