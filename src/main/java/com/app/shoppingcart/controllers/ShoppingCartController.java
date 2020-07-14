@@ -10,7 +10,7 @@ import java.util.Optional;
 @AllArgsConstructor
 @RestController
 @RequestMapping(value = "/cart")
-public class ShoppingCartController  {
+public class ShoppingCartController {
 
     private final AppFacade appFacade;
 
