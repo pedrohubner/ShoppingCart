@@ -26,8 +26,7 @@ public class ProductService {
         if (product.getAmount() > 0) {
             product.setAmount(product.getAmount() - 1);
             return productRepository.save(product);
-        }
-        else {
+        } else {
             throw new ProductException("Estoque zerado");
         }
     }

@@ -15,13 +15,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
-import java.util.concurrent.Semaphore;
 
 @Component
 @AllArgsConstructor
 public class AppFacade {
 
-    private final Semaphore semaphore = new Semaphore(2);
     private final ClientService clientService;
     private final AddressService addressService;
     private final CountryService countryService;
