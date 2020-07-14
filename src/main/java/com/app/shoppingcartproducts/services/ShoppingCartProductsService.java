@@ -2,7 +2,6 @@ package com.app.shoppingcartproducts.services;
 
 import com.app.product.exceptionhandler.ProductException;
 import com.app.product.models.Product;
-import com.app.product.repositories.ProductRepository;
 import com.app.product.services.ProductService;
 import com.app.shoppingcart.exceptionhandler.ShoppingCartException;
 import com.app.shoppingcart.models.ShoppingCart;
@@ -19,9 +18,16 @@ public class ShoppingCartProductsService {
     private final ShoppingCartService shoppingCartService;
     private final ProductService productService;
 
-    private Product getProduct(Long productId) {
-        return productService.findProductById(productId)
+    private Product addingProduct(Long productId) {
+        Product product = productService.findProductById(productId)
                 .orElseThrow(() -> new ProductException("Produto não encontrado"));
+        return productService.decreaseProductInventory(product);
+    }
+
+    private Product deletingProduct(Long productId) {
+        Product product = productService.findProductById(productId)
+                .orElseThrow(() -> new ProductException("Produto não encontrado"));
+        return productService.increaseProductInventory(product);
     }
 
     private ShoppingCart getShoppingCart(Long cartId) {
@@ -31,13 +37,13 @@ public class ShoppingCartProductsService {
 
     public ShoppingCart addProductToShoppingCart(Long cartId, Long productId) {
         ShoppingCart sc = getShoppingCart(cartId);
-        sc.getProductsList().add(getProduct(productId));
+        sc.getProductsList().add(addingProduct(productId));
         return shoppingCartRepository.save(sc);
     }
 
     public ShoppingCart removeProductFromShoppingCart(Long cartId, Long productId) {
         ShoppingCart sc = getShoppingCart(cartId);
-        sc.getProductsList().remove(getProduct(productId));
+        sc.getProductsList().remove(deletingProduct(productId));
         return shoppingCartRepository.save(sc);
     }
 }
