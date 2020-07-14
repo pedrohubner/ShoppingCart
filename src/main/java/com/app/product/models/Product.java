@@ -20,4 +20,5 @@ public class Product {
     private Long id;
     private String name;
     private Double value;
+    private Integer amount;
 }
