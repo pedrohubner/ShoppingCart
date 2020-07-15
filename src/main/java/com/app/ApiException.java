@@ -10,9 +10,9 @@ import org.springframework.http.HttpStatus;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ApiException {
+class ApiException {
 
-    public String message;
+    private String message;
     private HttpStatus status;
     private String suggestion;
 }
