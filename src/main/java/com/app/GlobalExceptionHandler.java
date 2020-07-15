@@ -12,7 +12,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiException> genericException() {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiException.builder()
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ApiException.builder()
                 .message("Ocorreu um erro inesperado")
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .build());
