@@ -5,8 +5,6 @@ import com.app.product.models.Product;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @AllArgsConstructor
 @RestController
 @RequestMapping(value = "/products")
@@ -20,7 +18,7 @@ public class ProductController {
     }
 
     @GetMapping(value = "/{id}")
-    public Optional<Product> findProduct(@PathVariable Long id) {
+    public Product findProduct(@PathVariable Long id) {
         return appFacade.findProductById(id);
     }
 
