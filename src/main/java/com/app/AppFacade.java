@@ -14,8 +14,6 @@ import com.app.shoppingcartproducts.services.ShoppingCartProductsService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
-
 @Component
 @AllArgsConstructor
 public class AppFacade {
@@ -31,7 +29,7 @@ public class AppFacade {
         return productService.createProduct(product);
     }
 
-    public Optional<Product> findProductById(Long id) {
+    public Product findProductById(Long id) {
         return productService.findProductById(id);
     }
 
@@ -47,7 +45,7 @@ public class AppFacade {
         return shoppingCartService.createShoppingCart(shoppingCart);
     }
 
-    public Optional<ShoppingCart> findShoppingCartById(Long id) {
+    public ShoppingCart findShoppingCartById(Long id) {
         return shoppingCartService.findShoppingCartById(id);
     }
 
