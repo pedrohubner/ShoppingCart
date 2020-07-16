@@ -1,11 +1,10 @@
 package com.app.shoppingcart.services;
 
+import com.app.shoppingcart.exceptionhandler.ShoppingCartException;
 import com.app.shoppingcart.models.ShoppingCart;
 import com.app.shoppingcart.repositories.ShoppingCartRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -17,8 +16,9 @@ public class ShoppingCartService {
         return shoppingCartRepository.save(shoppingCart);
     }
 
-    public Optional<ShoppingCart> findShoppingCartById(Long id) {
-        return shoppingCartRepository.findById(id);
+    public ShoppingCart findShoppingCartById(Long cartId) {
+        return shoppingCartRepository.findById(cartId)
+                .orElseThrow(() -> new ShoppingCartException("Carrinho não encontrado"));
     }
 
     public void deleteShoppingCartById(Long id) {
