@@ -2,8 +2,11 @@ package com.app.product.controllers;
 
 import com.app.AppFacade;
 import com.app.product.models.Product;
+import com.app.product.models.ProductDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -20,6 +23,11 @@ public class ProductController {
     @GetMapping(value = "/{id}")
     public Product findProduct(@PathVariable Long id) {
         return appFacade.findProductById(id);
+    }
+
+    @GetMapping(value = "/tst")
+    public List<ProductDTO> getDTOProductList() {
+        return appFacade.getDTOProductList();
     }
 
     @DeleteMapping
