@@ -16,7 +16,7 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    private Product findProductById(Long productId) {
+    public Product findProductById(Long productId) {
         return productRepository.findById(productId)
                 .orElseThrow(() -> new ProductException("Produto não encontrado"));
     }
