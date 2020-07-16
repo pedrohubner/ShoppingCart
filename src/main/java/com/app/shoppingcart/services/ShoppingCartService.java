@@ -24,4 +24,11 @@ public class ShoppingCartService {
     public void deleteShoppingCartById(Long id) {
         shoppingCartRepository.deleteById(id);
     }
+
+//    public List<ShoppingCartDTO> getDTOList() {
+//        return shoppingCartRepository.findAll()
+//                .stream()
+//                .map(DTOFactory::mapToCartDTO)
+//                .collect(Collectors.toList());
+//    }
 }
