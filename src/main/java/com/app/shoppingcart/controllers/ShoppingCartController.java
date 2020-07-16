@@ -5,8 +5,6 @@ import com.app.shoppingcart.models.ShoppingCart;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @AllArgsConstructor
 @RestController
 @RequestMapping(value = "/carts")
@@ -20,7 +18,7 @@ public class ShoppingCartController {
     }
 
     @GetMapping(value = "/{id}")
-    public Optional<ShoppingCart> findCart(@PathVariable Long id) {
+    public ShoppingCart findCart(@PathVariable Long id) {
         return appFacade.findShoppingCartById(id);
     }
 
