@@ -6,8 +6,6 @@ import com.app.product.repositories.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 @AllArgsConstructor
 public class ProductService {
@@ -18,11 +16,12 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public Optional<Product> findProductById(Long id) {
-        return productRepository.findById(id);
+    private Product findProductById(Long productId) {
+        return productRepository.findById(productId)
+                .orElseThrow(() -> new ProductException("Produto não encontrado"));
     }
 
-    public Product decreaseProductInventory(Product product) {
+    private Product decreaseProductInventory(Product product) {
         if (product.getAmount() > 0) {
             product.setAmount(product.getAmount() - 1);
             return productRepository.save(product);
@@ -31,9 +30,19 @@ public class ProductService {
         }
     }
 
-    public Product increaseProductInventory(Product product) {
+    private Product increaseProductInventory(Product product) {
         product.setAmount(product.getAmount() + 1);
         return productRepository.save(product);
+    }
+
+    public Product addingProduct(Long productId) {
+        Product product = findProductById(productId);
+        return decreaseProductInventory(product);
+    }
+
+    public Product deletingProduct(Long productId) {
+        Product product = findProductById(productId);
+        return increaseProductInventory(product);
     }
 
     public void deleteProductById(Long id) {
