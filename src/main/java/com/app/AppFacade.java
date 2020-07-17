@@ -48,9 +48,9 @@ public class AppFacade {
         return shoppingCartService.findShoppingCartById(id);
     }
 
-//    public List<ShoppingCartDTO> getDTOCartList() {
-//        return shoppingCartService.getDTOList();
-//    }
+    public List<ShoppingCartDTO> getDTOCartList() {
+        return shoppingCartService.getDTOList();
+    }
 
     public void deleteShoppingCart(Long id) {
         shoppingCartService.deleteShoppingCartById(id);
