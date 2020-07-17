@@ -57,11 +57,4 @@ public class ProductService {
     public void deleteAllProducts() {
         productRepository.deleteAllInBatch();
     }
-
-    public List<ProductDTO> getDTOList() {
-        return productRepository.findAll()
-                .stream()
-                .map(DTOFactory::mapToProductDTO)
-                .collect(Collectors.toList());
-    }
 }
