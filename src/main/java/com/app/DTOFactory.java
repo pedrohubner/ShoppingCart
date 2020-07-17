@@ -17,7 +17,7 @@ public class DTOFactory {
                 .build();
     }
 
-    public ShoppingCartDTO mapToCartDTO(ShoppingCart cart) {
+    public static ShoppingCartDTO mapToCartDTO(ShoppingCart cart) {
         return ShoppingCartDTO.builder()
                 .productsList(cart.getProductsList()
                         .stream()
