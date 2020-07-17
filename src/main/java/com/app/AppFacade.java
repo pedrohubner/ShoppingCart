@@ -2,9 +2,11 @@ package com.app;
 
 import com.app.product.models.Product;
 import com.app.product.models.ProductDTO;
+import com.app.product.services.ProductDTOService;
 import com.app.product.services.ProductService;
 import com.app.shoppingcart.models.ShoppingCart;
 import com.app.shoppingcart.models.ShoppingCartDTO;
+import com.app.shoppingcart.services.ShoppingCartDTOService;
 import com.app.shoppingcart.services.ShoppingCartService;
 import com.app.shoppingcartproducts.services.ShoppingCartProductsService;
 import lombok.AllArgsConstructor;
@@ -17,7 +19,9 @@ import java.util.List;
 public class AppFacade {
 
     private final ProductService productService;
+    private final ProductDTOService productDTOService;
     private final ShoppingCartService shoppingCartService;
+    private final ShoppingCartDTOService shoppingCartDTOService;
     private final ShoppingCartProductsService shoppingCartProductsService;
 
     public Product createProduct(Product product) {
@@ -29,7 +33,7 @@ public class AppFacade {
     }
 
     public List<ProductDTO> getDTOProductList() {
-        return productService.getDTOList();
+        return productDTOService.getDTOList();
     }
 
     public void deleteProductById(Long id) {
@@ -49,7 +53,7 @@ public class AppFacade {
     }
 
     public List<ShoppingCartDTO> getDTOCartList() {
-        return shoppingCartService.getDTOList();
+        return shoppingCartDTOService.getDTOList();
     }
 
     public void deleteShoppingCart(Long id) {
