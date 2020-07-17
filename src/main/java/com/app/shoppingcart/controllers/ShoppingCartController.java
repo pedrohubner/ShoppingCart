@@ -24,11 +24,11 @@ public class ShoppingCartController {
     public ShoppingCart findCart(@PathVariable Long id) {
         return appFacade.findShoppingCartById(id);
     }
-//
-//    @GetMapping(value = "/tst")
-//    public List<ShoppingCartDTO> getDTOCartList() {
-//        return appFacade.getDTOCartList();
-//    }
+
+    @GetMapping(value = "/tst")
+    public List<ShoppingCartDTO> getDTOCartList() {
+        return appFacade.getDTOCartList();
+    }
 
     @DeleteMapping(value = "/{id}")
     public void deleteCart(@PathVariable Long id) {
