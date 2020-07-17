@@ -1,10 +1,15 @@
 package com.app.shoppingcart.services;
 
+import com.app.DTOFactory;
 import com.app.shoppingcart.exceptionhandler.ShoppingCartException;
 import com.app.shoppingcart.models.ShoppingCart;
+import com.app.shoppingcart.models.ShoppingCartDTO;
 import com.app.shoppingcart.repositories.ShoppingCartRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -25,10 +30,10 @@ public class ShoppingCartService {
         shoppingCartRepository.deleteById(id);
     }
 
-//    public List<ShoppingCartDTO> getDTOList() {
-//        return shoppingCartRepository.findAll()
-//                .stream()
-//                .map(DTOFactory::mapToCartDTO)
-//                .collect(Collectors.toList());
-//    }
+    public List<ShoppingCartDTO> getDTOList() {
+        return shoppingCartRepository.findAll()
+                .stream()
+                .map(DTOFactory::mapToCartDTO)
+                .collect(Collectors.toList());
+    }
 }
