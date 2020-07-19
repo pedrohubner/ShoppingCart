@@ -1,5 +1,11 @@
 package com.app;
 
+import com.app.address.models.Address;
+import com.app.address.services.AddressService;
+import com.app.client.models.Client;
+import com.app.client.services.ClientService;
+import com.app.country.models.Country;
+import com.app.country.services.CountryService;
 import com.app.product.models.Product;
 import com.app.product.models.ProductDTO;
 import com.app.product.services.ProductDTOService;
@@ -13,15 +19,20 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.concurrent.Semaphore;
 
 @Component
 @AllArgsConstructor
 public class AppFacade {
 
+    private final ClientService clientService;
+    private final AddressService addressService;
+    private final CountryService countryService;
     private final ProductService productService;
     private final ProductDTOService productDTOService;
     private final ShoppingCartService shoppingCartService;
     private final ShoppingCartDTOService shoppingCartDTOService;
+    private final Semaphore semaphore = new Semaphore(2);
     private final ShoppingCartProductsService shoppingCartProductsService;
 
     public Product createProduct(Product product) {
@@ -60,11 +71,35 @@ public class AppFacade {
         shoppingCartService.deleteShoppingCartById(id);
     }
 
-    public ShoppingCart addProductToShoppingCart(Long cartId, Long productId) {
-        return shoppingCartProductsService.addProductToShoppingCart(cartId, productId);
+    public CartThread addProductToShoppingCart(Long cartId, Long productId) {
+        return new CartThread(semaphore, shoppingCartProductsService, cartId, productId);
     }
 
     public ShoppingCart removeProductFromShoppingCart(Long cartId, Long productId) {
         return shoppingCartProductsService.removeProductFromShoppingCart(cartId, productId);
+    }
+
+    public Client createClient(Client client) {
+        return clientService.createClient(client);
+    }
+
+    public void deleteClient(Long id) {
+        clientService.deleteClientById(id);
+    }
+
+    public Address createAddress(Address address) {
+        return addressService.createAddress(address);
+    }
+
+    public void deleteAddress(Long id) {
+        addressService.deleteAddressById(id);
+    }
+
+    public Country createCountry(Country country) {
+        return countryService.createCountry(country);
+    }
+
+    public void deleteCountry(Long id) {
+        countryService.deleteCountryById(id);
     }
 }
