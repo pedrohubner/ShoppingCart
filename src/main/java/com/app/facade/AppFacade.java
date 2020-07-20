@@ -1,6 +1,5 @@
 package com.app.facade;
 
-import com.app.CartThread;
 import com.app.product.models.Product;
 import com.app.product.models.ProductDTO;
 import com.app.product.services.ProductDTOService;
@@ -63,8 +62,8 @@ public class AppFacade {
         shoppingCartService.deleteShoppingCartById(id);
     }
 
-    public CartThread addProductToShoppingCart(Long cartId, Long productId) {
-        return new CartThread(semaphore, shoppingCartProductsService, cartId, productId);
+    public ShoppingCart addProductToShoppingCart(Long cartId, Long productId) {
+        return shoppingCartProductsService.addProductToShoppingCart(cartId, productId);
     }
 
     public ShoppingCart removeProductFromShoppingCart(Long cartId, Long productId) {
