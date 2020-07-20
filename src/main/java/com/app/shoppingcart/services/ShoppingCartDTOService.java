@@ -1,6 +1,6 @@
 package com.app.shoppingcart.services;
 
-import com.app.DTOFactory;
+import com.app.dto.DTOFactory;
 import com.app.shoppingcart.models.ShoppingCartDTO;
 import com.app.shoppingcart.repositories.ShoppingCartRepository;
 import lombok.AllArgsConstructor;

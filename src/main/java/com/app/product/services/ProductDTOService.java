@@ -1,6 +1,6 @@
 package com.app.product.services;
 
-import com.app.DTOFactory;
+import com.app.dto.DTOFactory;
 import com.app.product.models.ProductDTO;
 import com.app.product.repositories.ProductRepository;
 import lombok.AllArgsConstructor;

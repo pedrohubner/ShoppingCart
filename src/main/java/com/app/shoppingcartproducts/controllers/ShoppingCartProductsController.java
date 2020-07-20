@@ -1,6 +1,6 @@
 package com.app.shoppingcartproducts.controllers;
 
-import com.app.AppFacade;
+import com.app.facade.AppFacade;
 import com.app.CartThread;
 import com.app.shoppingcart.models.ShoppingCart;
 import lombok.AllArgsConstructor;

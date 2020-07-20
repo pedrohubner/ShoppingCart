@@ -1,6 +1,5 @@
 package com.app.shoppingcart.models;
 
-import com.app.client.models.Client;
 import com.app.product.models.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,8 +21,6 @@ public class ShoppingCart implements Cloneable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @OneToOne
-    private Client client;
     @ManyToMany
     @Fetch(FetchMode.JOIN)
     private List<Product> productsList;
