@@ -1,6 +1,6 @@
 package com.app.product.controllers;
 
-import com.app.AppFacade;
+import com.app.facade.AppFacade;
 import com.app.product.models.Product;
 import com.app.product.models.ProductDTO;
 import lombok.AllArgsConstructor;
