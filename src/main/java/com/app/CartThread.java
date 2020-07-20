@@ -11,7 +11,7 @@ public class CartThread implements Runnable {
     private final Semaphore semaphore;
     private final ShoppingCartProductsService shoppingCartProductsService;
 
-    CartThread(Semaphore semaphore, ShoppingCartProductsService shoppingCartProductsService, Long cartId,
+    public CartThread(Semaphore semaphore, ShoppingCartProductsService shoppingCartProductsService, Long cartId,
                Long productId) {
         this.semaphore = semaphore;
         this.shoppingCartProductsService = shoppingCartProductsService;
