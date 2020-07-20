@@ -1,11 +1,6 @@
-package com.app;
+package com.app.facade;
 
-import com.app.address.models.Address;
-import com.app.address.services.AddressService;
-import com.app.client.models.Client;
-import com.app.client.services.ClientService;
-import com.app.country.models.Country;
-import com.app.country.services.CountryService;
+import com.app.CartThread;
 import com.app.product.models.Product;
 import com.app.product.models.ProductDTO;
 import com.app.product.services.ProductDTOService;
@@ -25,9 +20,6 @@ import java.util.concurrent.Semaphore;
 @AllArgsConstructor
 public class AppFacade {
 
-    private final ClientService clientService;
-    private final AddressService addressService;
-    private final CountryService countryService;
     private final ProductService productService;
     private final ProductDTOService productDTOService;
     private final ShoppingCartService shoppingCartService;
@@ -77,29 +69,5 @@ public class AppFacade {
 
     public ShoppingCart removeProductFromShoppingCart(Long cartId, Long productId) {
         return shoppingCartProductsService.removeProductFromShoppingCart(cartId, productId);
-    }
-
-    public Client createClient(Client client) {
-        return clientService.createClient(client);
-    }
-
-    public void deleteClient(Long id) {
-        clientService.deleteClientById(id);
-    }
-
-    public Address createAddress(Address address) {
-        return addressService.createAddress(address);
-    }
-
-    public void deleteAddress(Long id) {
-        addressService.deleteAddressById(id);
-    }
-
-    public Country createCountry(Country country) {
-        return countryService.createCountry(country);
-    }
-
-    public void deleteCountry(Long id) {
-        countryService.deleteCountryById(id);
     }
 }
