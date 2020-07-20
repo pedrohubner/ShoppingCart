@@ -1,9 +1,10 @@
 package com.app.shoppingcart.services;
 
-import com.app.shoppingcart.exceptionhandler.ShoppingCartException;
+import com.app.exceptionhandler.ApiException;
 import com.app.shoppingcart.models.ShoppingCart;
 import com.app.shoppingcart.repositories.ShoppingCartRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,7 +19,8 @@ public class ShoppingCartService {
 
     public ShoppingCart findShoppingCartById(Long cartId) {
         return shoppingCartRepository.findById(cartId)
-                .orElseThrow(() -> new ShoppingCartException("Carrinho não encontrado"));
+                .orElseThrow(() -> new ApiException("Carrinho não encontrado", HttpStatus.NOT_FOUND,
+                        "Digite o id de um carrinho existente."));
     }
 
     public void deleteShoppingCartById(Long id) {
