@@ -1,18 +1,19 @@
 package com.app.exceptionhandler;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.EqualsAndHashCode;
 import org.springframework.http.HttpStatus;
 
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-class ApiException {
+@EqualsAndHashCode(callSuper = true)
+public class ApiException extends RuntimeException {
 
-    private String message;
-    private HttpStatus status;
-    private String suggestion;
+    private final HttpStatus status;
+    private final String suggestion;
+
+    public ApiException(String message, HttpStatus status, String suggestion) {
+        super(message);
+        this.status = status;
+        this.suggestion = suggestion;
+    }
 }
