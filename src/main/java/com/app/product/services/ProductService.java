@@ -1,9 +1,10 @@
 package com.app.product.services;
 
-import com.app.product.exceptionhandler.ProductException;
+import com.app.exceptionhandler.ApiException;
 import com.app.product.models.Product;
 import com.app.product.repositories.ProductRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,7 +19,8 @@ public class ProductService {
 
     public Product findProductById(Long productId) {
         return productRepository.findById(productId)
-                .orElseThrow(() -> new ProductException("Produto não encontrado"));
+                .orElseThrow(() -> new ApiException("Produto não encontrado,", HttpStatus.NOT_FOUND,
+                        "Digite o id de um carrinho existente."));
     }
 
     private Product decreaseProductInventory(Product product) {
@@ -26,7 +28,7 @@ public class ProductService {
             product.setAmount(product.getAmount() - 1);
             return productRepository.save(product);
         } else {
-            throw new ProductException("Estoque zerado");
+            throw new ApiException("Estoque zerado", HttpStatus.NO_CONTENT, "");
         }
     }
 
