@@ -1,4 +1,4 @@
-package com.app;
+package com.app.exceptionhandler;
 
 import com.app.product.exceptionhandler.ProductException;
 import com.app.shoppingcart.exceptionhandler.ShoppingCartException;
