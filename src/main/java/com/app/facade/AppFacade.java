@@ -9,6 +9,7 @@ import com.app.shoppingcart.models.ShoppingCartDTO;
 import com.app.shoppingcart.services.ShoppingCartDTOService;
 import com.app.shoppingcart.services.ShoppingCartService;
 import com.app.shoppingcartproducts.services.ShoppingCartProductsService;
+import com.app.thread.CartThread;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -62,8 +63,8 @@ public class AppFacade {
         shoppingCartService.deleteShoppingCartById(id);
     }
 
-    public ShoppingCart addProductToShoppingCart(Long cartId, Long productId) {
-        return shoppingCartProductsService.addProductToShoppingCart(cartId, productId);
+    public CartThread addProductToShoppingCart(Long cartId, Long productId) {
+        return new CartThread(semaphore, shoppingCartProductsService, cartId, productId);
     }
 
     public ShoppingCart removeProductFromShoppingCart(Long cartId, Long productId) {
