@@ -14,7 +14,7 @@ public class GlobalExceptionHandler {
                 .body(ExceptionBody.builder()
                         .message("Ocorreu um erro inesperado")
                         .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                        .messageForDeveloper(e.getMessage() == null ? "" : e.getMessage())
+                        .suggestion(e.getMessage() == null ? "" : e.getMessage())
                         .build());
     }
 
@@ -23,8 +23,8 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(ExceptionBody.builder()
                         .message(apiException.getMessage())
-                        .status(HttpStatus.NOT_FOUND)
-                        .suggestion("Digite o id de um carrinho existente")
+                        .status(apiException.getStatus())
+                        .suggestion(apiException.getSuggestion())
                         .build());
     }
 }
