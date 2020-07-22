@@ -15,5 +15,4 @@ public class ExceptionBody {
     private String message;
     private HttpStatus status;
     private String suggestion;
-    private String messageForDeveloper;
 }
