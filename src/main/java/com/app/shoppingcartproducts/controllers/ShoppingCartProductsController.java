@@ -2,7 +2,6 @@ package com.app.shoppingcartproducts.controllers;
 
 import com.app.facade.AppFacade;
 import com.app.shoppingcart.models.ShoppingCart;
-import com.app.thread.CartThread;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
