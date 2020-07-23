@@ -9,12 +9,10 @@ import com.app.shoppingcart.models.ShoppingCartDTO;
 import com.app.shoppingcart.services.ShoppingCartDTOService;
 import com.app.shoppingcart.services.ShoppingCartService;
 import com.app.shoppingcartproducts.services.ShoppingCartProductsService;
-import com.app.thread.CartThread;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.concurrent.Semaphore;
 
 @Component
 @AllArgsConstructor
@@ -24,7 +22,6 @@ public class AppFacade {
     private final ProductDTOService productDTOService;
     private final ShoppingCartService shoppingCartService;
     private final ShoppingCartDTOService shoppingCartDTOService;
-    private final Semaphore semaphore = new Semaphore(2);
     private final ShoppingCartProductsService shoppingCartProductsService;
 
     public Product createProduct(Product product) {
