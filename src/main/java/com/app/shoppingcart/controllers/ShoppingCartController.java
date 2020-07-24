@@ -13,8 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping(value = "/carts")
-@Api(value = "API Rest Shopping Cart")
-@CrossOrigin(origins = "*")
+@Api(value = "Shopping Cart Controller")
 public class ShoppingCartController {
 
     private final AppFacade appFacade;

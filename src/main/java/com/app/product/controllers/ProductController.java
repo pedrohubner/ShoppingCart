@@ -14,7 +14,6 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/products")
 @Api(value = "API Rest Product")
-@CrossOrigin(origins = "*")
 public class ProductController {
 
     private final AppFacade appFacade;

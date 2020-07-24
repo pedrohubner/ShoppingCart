@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 @RestController
 @RequestMapping(value = "/carts")
-@Api(value = "API Rest Shopping Cart")
-@CrossOrigin(origins = "*")
+@Api(value = "Shopping Cart Products Controller")
 public class ShoppingCartProductsController {
 
     private final AppFacade appFacade;
