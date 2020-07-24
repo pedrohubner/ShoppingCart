@@ -1,27 +1,24 @@
-package com.config;
+package com.app.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import java.util.ArrayList;
-
 @Configuration
 @EnableSwagger2
-public class SwaggerConfig extends WebMvcConfigurationSupport {
+public class SwaggerConfig {
 
+    @Bean
     public Docket shoppingCartApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.app"))
-                .paths(PathSelectors.regex("/carts."))
-                .paths(PathSelectors.regex("/products."))
+                .apis(RequestHandlerSelectors.any())
+                .paths(PathSelectors.any())
                 .build()
                 .apiInfo(metaInfo());
     }
@@ -29,13 +26,11 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
     private ApiInfo metaInfo() {
         return new ApiInfo(
                 "Shopping Cart Rest API",
-                "API Reste simulando um carrinho de compras",
-                "1.0",
+                "API Rest simulando um carrinho de compras",
+                "1.0.0",
                 "Terms of service",
-                new Contact("Pedro Hubner", "https://www.linkedin.com/in/pedro-na%C3%A3-h%C3%BCbner-ab0a70159/",
-                        "pedronhubner@gmail.com"),
+                "Pedro Hübner",
                 "Apache License Version 2.0",
-                "https://www.apache.org/license.html", new ArrayList<>()
-        );
+                "https://www.apache.org/license.html");
     }
 }
