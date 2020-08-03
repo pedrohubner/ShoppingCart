@@ -6,9 +6,9 @@ import com.app.product.services.ProductDTOService;
 import com.app.product.services.ProductService;
 import com.app.shoppingcart.models.ShoppingCart;
 import com.app.shoppingcart.models.ShoppingCartDTO;
+import com.app.shoppingcart.repositories.ShoppingCartRepository;
 import com.app.shoppingcart.services.ShoppingCartDTOService;
 import com.app.shoppingcart.services.ShoppingCartService;
-import com.app.shoppingcartproducts.services.ShoppingCartProductsService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -21,8 +21,8 @@ public class AppFacade {
     private final ProductService productService;
     private final ProductDTOService productDTOService;
     private final ShoppingCartService shoppingCartService;
+    private final ShoppingCartRepository shoppingCartRepository;
     private final ShoppingCartDTOService shoppingCartDTOService;
-    private final ShoppingCartProductsService shoppingCartProductsService;
 
     public Product createProduct(Product product) {
         return productService.createProduct(product);
@@ -61,10 +61,14 @@ public class AppFacade {
     }
 
     public ShoppingCart addProductToShoppingCart(Long cartId, Long productId) {
-        return shoppingCartProductsService.addProductToShoppingCart(cartId, productId);
+        ShoppingCart sc = shoppingCartService.findShoppingCartById(cartId);
+        sc.getProductsList().add(productService.addingProduct(productId));
+        return shoppingCartRepository.save(sc);
     }
 
     public ShoppingCart removeProductFromShoppingCart(Long cartId, Long productId) {
-        return shoppingCartProductsService.removeProductFromShoppingCart(cartId, productId);
+        ShoppingCart sc = shoppingCartService.findShoppingCartById(cartId);
+        sc.getProductsList().remove(productService.deletingProduct(productId));
+        return shoppingCartRepository.save(sc);
     }
 }
