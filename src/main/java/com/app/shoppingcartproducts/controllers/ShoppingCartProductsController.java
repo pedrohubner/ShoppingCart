@@ -16,13 +16,13 @@ public class ShoppingCartProductsController {
     private final AppFacade appFacade;
 
     @PostMapping(value = "/{cartId}/products/{productId}")
-    @ApiOperation(value = "Adiciona um product a um carrinho")
+    @ApiOperation(value = "Adiciona um objeto Product dentro da productsList do objeto ShoppingCart.")
     public ShoppingCart addProductToShoppingCart(@PathVariable Long cartId, @PathVariable Long productId) {
         return appFacade.addProductToShoppingCart(cartId, productId);
     }
 
     @DeleteMapping(value = "/{cartId}/products/{productId}")
-    @ApiOperation(value = "Deleta um product de um carrinho")
+    @ApiOperation(value = "Deleta um objeto Product dentro da productsList do objeto ShoppingCart.")
     public ShoppingCart removeProductFromShoppingCart(@PathVariable Long cartId, @PathVariable Long productId) {
         return appFacade.removeProductFromShoppingCart(cartId, productId);
     }
