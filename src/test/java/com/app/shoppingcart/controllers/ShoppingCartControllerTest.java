@@ -26,6 +26,8 @@ public class ShoppingCartControllerTest {
     public void returnShoppingCart_IfObjectIsFound() {
         shoppingCartController.createCart(shoppingCart);
         verify(appFacade, times(1)).createShoppingCart(any());
+        ShoppingCart shoppingCart = new ShoppingCart();
+        when(shoppingCartController.createCart(any())).thenReturn(shoppingCart);
     }
 
     @Test
