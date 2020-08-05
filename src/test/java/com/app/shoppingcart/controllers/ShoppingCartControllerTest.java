@@ -14,9 +14,6 @@ import static org.mockito.Mockito.*;
 public class ShoppingCartControllerTest {
 
     @Mock
-    ShoppingCart shoppingCart;
-
-    @Mock
     AppFacade appFacade;
 
     @InjectMocks
@@ -24,14 +21,15 @@ public class ShoppingCartControllerTest {
 
     @Test
     public void returnShoppingCart_IfObjectIsFound() {
-        shoppingCartController.createCart(shoppingCart);
-        verify(appFacade, times(1)).createShoppingCart(any());
         ShoppingCart shoppingCart = new ShoppingCart();
+        shoppingCartController.createCart(shoppingCart);
+        verify(appFacade, times(1)).createShoppingCart(shoppingCart);
         when(shoppingCartController.createCart(any())).thenReturn(shoppingCart);
     }
 
     @Test
     public void returnShoppingCartById_IfIdNotNull() {
+        ShoppingCart shoppingCart = new ShoppingCart();
         shoppingCartController.findCart(shoppingCart.getId());
         verify(appFacade, times(1)).findShoppingCartById(any());
     }
@@ -44,6 +42,7 @@ public class ShoppingCartControllerTest {
 
     @Test
     public void deleteShoppingCart_IfIdNotNull() {
+        ShoppingCart shoppingCart = new ShoppingCart();
         shoppingCartController.deleteCart(shoppingCart.getId());
         verify(appFacade, times(1)).deleteShoppingCart(any());
     }
