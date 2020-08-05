@@ -1,9 +1,8 @@
 package com.app.shoppingcart.services;
 
-import com.app.product.models.Product;
+import com.app.exceptionhandler.ApiException;
 import com.app.shoppingcart.models.ShoppingCart;
 import com.app.shoppingcart.repositories.ShoppingCartRepository;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
@@ -12,19 +11,13 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Optional;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 @ExtendWith(MockitoExtension.class)
 public class ShoppingCartServiceTest {
-
-    @Mock
-    ShoppingCart shoppingCart;
 
     @Mock
     ShoppingCartRepository shoppingCartRepository;
@@ -34,24 +27,28 @@ public class ShoppingCartServiceTest {
 
     @Test
     public void returnShoppingCart_IfItExist() {
-        List<Product> products = Arrays.asList();
-        ShoppingCart shoppingCart = ShoppingCart.builder()
-                .id(1L)
-                .productsList(products)
-                .build();
-        ShoppingCart shoppingCartReturn = shoppingCartRepository.save(shoppingCart);
-        Assert.assertEquals(shoppingCart, shoppingCartReturn);
+        ShoppingCart shoppingCart = new ShoppingCart();
+        shoppingCartService.createShoppingCart(shoppingCart);
+        verify(shoppingCartRepository, times(1)).save(shoppingCart);
     }
 
     @Test
     public void findShoppingCartById_IfIdNotNull() {
-        shoppingCartService.findShoppingCartById(1L);
+        ShoppingCart shoppingCart = new ShoppingCart();
+        when(shoppingCartRepository.findById(any())).thenReturn(Optional.of(shoppingCart));
+        shoppingCartService.findShoppingCartById(52641116484L);
         verify(shoppingCartRepository, times(1)).findById(any());
+    }
+
+    @Test(expected = ApiException.class)
+    public void whenNonExistingIdIsPassed_throwException() {
+        shoppingCartService.findShoppingCartById(1L);
+        when(shoppingCartRepository.findById(1L)).thenReturn(Optional.empty());
     }
 
     @Test
     public void deleteShoppingCart_IfItExist() {
-        shoppingCartService.deleteShoppingCartById(shoppingCart.getId());
-        verify(shoppingCartRepository, times(1)).deleteById(any());
+        shoppingCartService.deleteShoppingCartById(1L);
+        verify(shoppingCartRepository, times(1)).deleteById(1L);
     }
 }
