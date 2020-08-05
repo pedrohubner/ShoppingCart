@@ -33,7 +33,7 @@ public class ShoppingCartServiceTest {
     }
 
     @Test
-    public void findShoppingCartById_IfIdNotNull() {
+    public void findShoppingCartById_ifIdNotNull() {
         ShoppingCart shoppingCart = new ShoppingCart();
         when(shoppingCartRepository.findById(any())).thenReturn(Optional.of(shoppingCart));
         shoppingCartService.findShoppingCartById(52641116484L);
