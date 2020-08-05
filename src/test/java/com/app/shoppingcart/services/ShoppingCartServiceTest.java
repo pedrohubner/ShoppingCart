@@ -35,9 +35,9 @@ public class ShoppingCartServiceTest {
     @Test
     public void findShoppingCartById_ifIdNotNull() {
         ShoppingCart shoppingCart = new ShoppingCart();
-        when(shoppingCartRepository.findById(any())).thenReturn(Optional.of(shoppingCart));
-        shoppingCartService.findShoppingCartById(52641116484L);
-        verify(shoppingCartRepository, times(1)).findById(any());
+        when(shoppingCartRepository.findById(1L)).thenReturn(Optional.of(shoppingCart));
+        shoppingCartService.findShoppingCartById(1L);
+        verify(shoppingCartRepository, times(1)).findById(1L);
     }
 
     @Test(expected = ApiException.class)
