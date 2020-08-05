@@ -1,11 +1,7 @@
 package com.app.facade;
 
-import com.app.product.models.Product;
-import com.app.product.models.ProductDTO;
 import com.app.product.services.ProductDTOService;
 import com.app.product.services.ProductService;
-import com.app.shoppingcart.models.ShoppingCart;
-import com.app.shoppingcart.models.ShoppingCartDTO;
 import com.app.shoppingcart.repositories.ShoppingCartRepository;
 import com.app.shoppingcart.services.ShoppingCartDTOService;
 import com.app.shoppingcart.services.ShoppingCartService;
@@ -14,8 +10,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-
-import java.util.List;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AppFacadeTest {
