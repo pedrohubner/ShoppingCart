@@ -27,12 +27,8 @@ public class ProductControllerTest {
 
     @Test
     public void returnProduct_ifProductIsFound() {
-//        productController.createProduct(product);
-//        verify(appFacade, times(1)).createProduct(any());
         when(productRepository.save(any(Product.class))).thenReturn(new Product());
-
         Product product = new Product();
-
         assertThat(productController.createProduct(product));
     }
 
