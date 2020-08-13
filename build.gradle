@@ -6,8 +6,8 @@ plugins {
 }
 
 dependencies {
-	compile project (':contract')
-	compile project (':impl')
+	implementation project (':contract')
+	implementation project (':impl')
 }
 
 group = 'com.app'
