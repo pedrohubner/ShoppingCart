@@ -32,7 +32,7 @@ dependencies {
 }
 
 test {
-	outputs.dir snippetsDir
+//	outputs.dir snippetsDir
 	useJUnitPlatform()
 }
 
