@@ -19,17 +19,18 @@ public class SwaggerConfig {
                 .select()
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
-                .build();
+                .build()
+                .apiInfo(metaInfo());
     }
-//
-//    private ApiInfo metaInfo() {
-//        return new ApiInfo(
-//                "Shopping Cart Rest API",
-//                "API Rest simulando um carrinho de compras",
-//                "1.0.0",
-//                "Terms of service",
-//                "Pedro Hübner",
-//                "Apache License Version 2.0",
-//                "https://www.apache.org/license.html");
-//    }
+
+    private ApiInfo metaInfo() {
+        return new ApiInfo(
+                "Shopping Cart Rest API",
+                "API Rest simulando um carrinho de compras",
+                "1.0.0",
+                "Terms of service",
+                "Pedro Hübner",
+                "Apache License Version 2.0",
+                "https://www.apache.org/license.html");
+    }
 }
