@@ -87,16 +87,4 @@ public class AppFacadeTest {
         appFacade.deleteShoppingCart(1L);
         verify(shoppingCartService, times(1)).deleteShoppingCartById(1L);
     }
-
-    @Test
-    public void addProductToShoppingCart() {
-//        appFacade.addProductToShoppingCart(1L, 1L);
-//        when(shoppingCartService.findShoppingCartById(1L)).thenReturn(shoppingCart);
-    }
-
-    @Test
-    public void removeProductFromShoppingCart() {
-        appFacade.removeProductFromShoppingCart(1L, 1L);
-//        verify(shoppingCartService.findShoppingCartById())
-    }
 }
