@@ -37,22 +37,6 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void decreaseProductInventory_ifProductExist() {
-    }
-
-    @Test
-    public void increaseProductInventory_ifProductExist() {
-    }
-
-    @Test
-    public void addProductById_ifIdItIsNotNull() {
-    }
-
-    @Test
-    public void deleteProductById_ifIdItIsNotNull() {
-    }
-
-    @Test
     public void deleteProductById_ifIdNotNull() {
         productService.deletingProduct(product.getId());
         verify(productRepository, times(1)).deleteById(any());

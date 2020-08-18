@@ -16,7 +16,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShoppingCart implements Cloneable {
+public class ShoppingCart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,9 +24,4 @@ public class ShoppingCart implements Cloneable {
     @ManyToMany
     @Fetch(FetchMode.JOIN)
     private List<Product> productsList;
-
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
 }
