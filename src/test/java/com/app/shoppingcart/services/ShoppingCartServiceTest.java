@@ -3,6 +3,7 @@ package com.app.shoppingcart.services;
 import com.app.exceptionhandler.ApiException;
 import com.app.shoppingcart.models.ShoppingCart;
 import com.app.shoppingcart.repositories.ShoppingCartRepository;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -23,29 +24,24 @@ public class ShoppingCartServiceTest {
     ShoppingCartService shoppingCartService;
 
     @Test
-    public void returnShoppingCart_IfItExist() {
+    public void must_Return_New_Shopping_Cart_When_Repository_Saves_Shopping_Cart() {
         ShoppingCart shoppingCart = new ShoppingCart();
-        shoppingCartService.createShoppingCart(shoppingCart);
-        verify(shoppingCartRepository, times(1)).save(shoppingCart);
+        when(shoppingCartRepository.save(shoppingCart)).thenReturn(shoppingCart);
+        ShoppingCart shoppingCart1 = shoppingCartService.createShoppingCart(shoppingCart);
+        Assert.assertEquals(shoppingCart, shoppingCart1);
     }
 
     @Test
-    public void findShoppingCartById_ifIdNotNull() {
+    public void must_Return_A_Shopping_Cart_When_It_Returns_Full_Optional() {
         ShoppingCart shoppingCart = new ShoppingCart();
         when(shoppingCartRepository.findById(1L)).thenReturn(Optional.of(shoppingCart));
-        shoppingCartService.findShoppingCartById(1L);
-        verify(shoppingCartRepository, times(1)).findById(1L);
+        ShoppingCart shoppingCart1 = shoppingCartService.findShoppingCartById(1L);
+        Assert.assertEquals(shoppingCart, shoppingCart1);
     }
 
     @Test(expected = ApiException.class)
-    public void whenNonExistingIdIsPassed_throwException() {
-        shoppingCartService.findShoppingCartById(1L);
+    public void must_Throw_Exception__When_It_Returns_Empty_Optional() {
         when(shoppingCartRepository.findById(1L)).thenReturn(Optional.empty());
-    }
-
-    @Test
-    public void deleteShoppingCart_IfItExist() {
-        shoppingCartService.deleteShoppingCartById(1L);
-        verify(shoppingCartRepository, times(1)).deleteById(1L);
+        shoppingCartService.findShoppingCartById(1L);
     }
 }
