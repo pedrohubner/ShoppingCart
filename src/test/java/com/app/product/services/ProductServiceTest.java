@@ -1,22 +1,21 @@
 package com.app.product.services;
 
+import com.app.exceptionhandler.ApiException;
 import com.app.product.models.Product;
 import com.app.product.repositories.ProductRepository;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import java.util.Optional;
+
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProductServiceTest {
-
-    @Mock
-    Product product;
 
     @Mock
     ProductRepository productRepository;
@@ -25,26 +24,34 @@ public class ProductServiceTest {
     ProductService productService;
 
     @Test
-    public void createProduct_ifItExist() {
-        productService.createProduct(product);
-        verify(productRepository, times(1)).save(any());
+    public void must_Return_New_Product_When_Repository_Saves_Product() {
+        Product product = new Product();
+        when(productRepository.save(product)).thenReturn(product);
+        Product product1 = productService.createProduct(product);
+        Assert.assertEquals(product, product1);
     }
 
     @Test
-    public void findProductById_IfIdNotNull() {
+    public void must_Return_A_Product_When_It_Returns_Full_Optional() {
+        Product product = new Product();
+        when(productRepository.findById(1L)).thenReturn(Optional.of(product));
+        Product product1 = productService.findProductById(1L);
+        Assert.assertEquals(product, product1);
+    }
+
+    @Test(expected = ApiException.class)
+    public void must_Throw_An_Exception_When_It_Returns_An_Empty_Optional() {
+        when(productRepository.findById(1L)).thenReturn(Optional.empty());
         productService.findProductById(1L);
-        verify(productRepository, times(1)).findAllById(any());
     }
 
     @Test
-    public void deleteProductById_ifIdNotNull() {
-        productService.deletingProduct(product.getId());
-        verify(productRepository, times(1)).deleteById(any());
-    }
-
-    @Test
-    public void deleteAllProducts() {
-        productService.deleteAllProducts();
-        verify(productRepository, times(1)).deleteAllInBatch();
+    public void decrease_Product_Inventory_If_Inventory_Is_Bigger_Than_Zero(){
+        Product product = new Product(1L, "Eno", 1., 15);
+        when(productRepository.findById(1L)).thenReturn(Optional.of(product));
+        when(productRepository.save(product)).thenReturn(new Product());
+        Product product1 = new Product(1L, "Eno", 1., 14);
+        productService.addingProduct(1L);
+        Assert.assertEquals(product, product1);
     }
 }
