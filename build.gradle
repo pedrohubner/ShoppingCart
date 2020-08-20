@@ -4,6 +4,7 @@ plugins {
 	id 'org.asciidoctor.convert' version '1.5.8'
 	id 'java'
 	id "org.sonarqube" version "3.0"
+	id 'info.solidsoft.pitest' version '1.5.1'
 }
 
 group = 'com.app'
@@ -11,10 +12,6 @@ version = '0.0.1-SNAPSHOT'
 
 repositories {
 	mavenCentral()
-}
-
-ext {
-	set('snippetsDir', file("build/generated-snippets"))
 }
 
 dependencies {
@@ -33,9 +30,4 @@ dependencies {
 
 test {
 	useJUnitPlatform()
-}
-
-asciidoctor {
-	inputs.dir snippetsDir
-	dependsOn test
 }
