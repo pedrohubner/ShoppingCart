@@ -9,6 +9,9 @@ import java.util.stream.Collectors;
 
 public class DTOFactory {
 
+    private DTOFactory() {
+    }
+
     public static ProductDTO mapToProductDTO(Product product) {
         return ProductDTO.builder()
                 .name(product.getName())
@@ -19,7 +22,7 @@ public class DTOFactory {
 
     public static ShoppingCartDTO mapToCartDTO(ShoppingCart cart) {
         return ShoppingCartDTO.builder()
-                .productsList(cart.getProductsList()
+                .productsList((cart.getProductsList() == null) ? null : cart.getProductsList()
                         .stream()
                         .map(DTOFactory::mapToProductDTO)
                         .collect(Collectors.toList()))

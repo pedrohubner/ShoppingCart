@@ -5,10 +5,20 @@ plugins {
 	id 'java'
 	id "org.sonarqube" version "3.0"
 	id 'info.solidsoft.pitest' version '1.5.1'
+	id 'jacoco'
 }
 
 group = 'com.app'
 version = '0.0.1-SNAPSHOT'
+
+sonarqube {
+	properties {
+		property "sonar.sonar_token", "ee66103ed8e102c97bfb52ff0ca5042349131db6"
+		property "sonar.projectKey", "test-do-pepe"
+		property "sonar.organization", "pedrohubner"
+		property "sonar.host.url", "https://sonarcloud.io"
+	}
+}
 
 repositories {
 	mavenCentral()
