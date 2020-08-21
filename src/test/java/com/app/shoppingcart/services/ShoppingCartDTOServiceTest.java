@@ -27,5 +27,9 @@ public class ShoppingCartDTOServiceTest {
     public void return_Shopping_Cart_Dto_List_When_Repository_Find_Shopping_Cart_List() {
         when(shoppingCartRepository.findAll()).thenReturn(List.of(new ShoppingCart()));
 
+        List<ShoppingCartDTO> shoppingCartDTOList = List.of(new ShoppingCartDTO());
+        List<ShoppingCartDTO> response = shoppingCartDTOService.getDTOList();
+
+        Assert.assertEquals(shoppingCartDTOList, response);
     }
 }
