@@ -53,7 +53,7 @@ public class AppFacade {
     }
 
     public List<ShoppingCartDTO> getDTOCartList() {
-        return shoppingCartDTOService.getDTOList();
+        return shoppingCartDTOService.getAllShoppingCarts();
     }
 
     public void deleteShoppingCart(Long id) {
