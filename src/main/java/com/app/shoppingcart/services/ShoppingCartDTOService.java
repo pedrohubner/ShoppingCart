@@ -15,7 +15,7 @@ public class ShoppingCartDTOService {
 
     private final ShoppingCartRepository shoppingCartRepository;
 
-    public List<ShoppingCartDTO> getDTOList() {
+    public List<ShoppingCartDTO> getAllShoppingCarts() {
         return shoppingCartRepository.findAll()
                 .stream()
                 .map(DTOFactory::mapToCartDTO)
