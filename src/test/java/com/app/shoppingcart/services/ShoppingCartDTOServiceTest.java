@@ -1,5 +1,7 @@
 package com.app.shoppingcart.services;
 
+import com.app.product.models.Product;
+import com.app.product.models.ProductDTO;
 import com.app.shoppingcart.models.ShoppingCart;
 import com.app.shoppingcart.models.ShoppingCartDTO;
 import com.app.shoppingcart.repositories.ShoppingCartRepository;
@@ -25,11 +27,24 @@ public class ShoppingCartDTOServiceTest {
 
     @Test
     public void return_Shopping_Cart_Dto_List_When_Repository_Find_Shopping_Cart_List() {
-        when(shoppingCartRepository.findAll()).thenReturn(List.of(new ShoppingCart()));
+        List<Product> productList = List.of(new Product());
+        when(shoppingCartRepository.findAll()).thenReturn(List.of(new ShoppingCart(1L, productList)));
 
-        List<ShoppingCartDTO> shoppingCartDTOList = List.of(new ShoppingCartDTO());
-        List<ShoppingCartDTO> response = shoppingCartDTOService.getDTOList();
+        List<ShoppingCartDTO> shoppingCartDTOList = List.of(new ShoppingCartDTO(List.of(new ProductDTO())));
+        List<ShoppingCartDTO> response = shoppingCartDTOService.getAllShoppingCarts();
 
         Assert.assertEquals(shoppingCartDTOList, response);
+    }
+
+    @Test
+    public void return_Null_ProductList_When_Repository_Find_Shopping_Cart_List() {
+        when(shoppingCartRepository.findAll()).thenReturn(List.of(new ShoppingCart()));
+
+        List<ShoppingCartDTO> response = shoppingCartDTOService.getAllShoppingCarts();
+
+        ShoppingCartDTO shoppingCart1 = response.get(0);
+        List<ProductDTO> productDTOS = shoppingCart1.getProductsList();
+
+        Assert.assertNull(productDTOS);
     }
 }
