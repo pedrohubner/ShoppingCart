@@ -1,4 +1,4 @@
-package com.app;
+package com.app.end2end.product;
 
 import com.app.product.models.Product;
 import com.app.product.repositories.ProductRepository;
@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-public class ProductIntegrationTest {
+public class ProductEnd2EndTest {
 
     @Autowired
     MockMvc mockMvc;
@@ -62,13 +62,11 @@ public class ProductIntegrationTest {
 
     @Test
     public void should_Delete_Product_When_Repository_Finds_Product_By_Id() throws Exception {
-        Product product = new Product(2L, "Azitromicina", 24., 21);
+        Product product = new Product(1L, "Azitromicina", 24., 21);
 
         productRepository.save(product);
 
-        mockMvc.perform(delete("/products/{id}", 2L)
-                .content(objectMapper.writeValueAsString(product))
-                .contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(delete("/products/{id}", 1L))
                 .andExpect(status().isOk());
     }
 }
