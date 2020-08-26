@@ -1,4 +1,4 @@
-package com.app.shoppingcartproducts.controllers;
+package com.app.shoppingcartproducts;
 
 import com.app.facade.AppFacade;
 import com.app.shoppingcart.models.ShoppingCart;
