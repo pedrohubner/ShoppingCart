@@ -1,4 +1,4 @@
-package com.app;
+package com.app.end2end.product;
 
 import com.app.product.models.Product;
 import com.app.product.repositories.ProductRepository;
@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-public class ProductIntegrationTest {
+public class ProductEnd2EndTest {
 
     @Autowired
     MockMvc mockMvc;
@@ -66,9 +66,7 @@ public class ProductIntegrationTest {
 
         productRepository.save(product);
 
-        mockMvc.perform(delete("/products/{id}", 1L)
-                .content(objectMapper.writeValueAsString(product))
-                .contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(delete("/products/{id}", 1L))
                 .andExpect(status().isOk());
     }
 }
