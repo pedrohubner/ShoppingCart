@@ -1,4 +1,4 @@
-package com.app;
+package com.app.end2end.shoppingcart;
 
 import com.app.product.models.Product;
 import com.app.shoppingcart.models.ShoppingCart;
@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-public class ShoppingCartIntegrationTest {
+public class ShoppingCartEnd2EndTest {
 
     @Autowired
     MockMvc mockMvc;
@@ -82,9 +82,7 @@ public class ShoppingCartIntegrationTest {
 
         shoppingCartRepository.save(shoppingCart);
 
-        mockMvc.perform(delete("/carts/{id}", 1L)
-                .content(objectMapper.writeValueAsBytes(shoppingCart))
-                .contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(delete("/carts/{id}", 1L))
                 .andExpect(status().isOk());
     }
 }
