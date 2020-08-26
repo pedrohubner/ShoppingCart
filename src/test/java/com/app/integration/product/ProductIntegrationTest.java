@@ -1,5 +1,6 @@
 package com.app.integration.product;
 
+import com.app.exceptionhandler.ApiException;
 import com.app.product.models.Product;
 import com.app.product.services.ProductService;
 import org.junit.Assert;
@@ -26,7 +27,7 @@ public class ProductIntegrationTest {
     }
 
     @Test
-    public void whenFindById_thenReturnProduct() {
+    public void when_Find_By_Id_Repository_Should_Return_Product() {
         Product response = Product.builder()
                 .id(1L)
                 .build();
@@ -36,5 +37,18 @@ public class ProductIntegrationTest {
         Product found = productService.findProductById(1L);
 
         Assert.assertEquals(found, response);
+    }
+
+    @Test(expected = ApiException.class)
+    public void repository_Should_Delete_Product_When_Find_By_Id() {
+        Product response = Product.builder()
+                .id(1L)
+                .build();
+
+        productService.createProduct(response);
+
+        productService.deleteProductById(1L);
+
+        productService.findProductById(1L);
     }
 }
