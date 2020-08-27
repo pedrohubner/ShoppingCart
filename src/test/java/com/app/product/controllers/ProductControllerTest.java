@@ -1,10 +1,13 @@
 package com.app.product.controllers;
 
+import com.app.facade.AppFacade;
 import com.app.product.models.Product;
 import com.app.product.services.ProductService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,7 +30,7 @@ public class ProductControllerTest {
     ObjectMapper mapper;
 
     @Autowired
-    ProductService productService;
+    AppFacade appFacade;
 
     @Test
     public void when_Body_Passed_asParam_Create_Product() throws Exception {
@@ -43,7 +46,7 @@ public class ProductControllerTest {
     public void when_Id_Passed_asParam_Find_Product_byId_ifExists() throws Exception {
         Product product = new Product();
 
-        productService.createProduct(product);
+        appFacade.createProduct(product);
 
         mockMvc.perform(get("/products/{ìd}", 1L))
                 .andExpect(status().isOk());
@@ -65,7 +68,7 @@ public class ProductControllerTest {
     public void should_Delete_Products_byId_ifProductExists() throws Exception {
         Product product = new Product();
 
-        productService.createProduct(product);
+        appFacade.createProduct(product);
 
         mockMvc.perform(delete("/products/{id}", 1L))
                 .andExpect(status().isOk());
