@@ -2,12 +2,9 @@ package com.app.product.controllers;
 
 import com.app.facade.AppFacade;
 import com.app.product.models.Product;
-import com.app.product.services.ProductService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -48,7 +45,7 @@ public class ProductControllerTest {
 
         appFacade.createProduct(product);
 
-        mockMvc.perform(get("/products/{ìd}", 1L))
+        mockMvc.perform(get("/products/{id}", 1L))
                 .andExpect(status().isOk());
     }
 
