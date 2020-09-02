@@ -13,6 +13,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.Optional;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -39,9 +41,9 @@ public class ProductEnd2EndTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        Product product1 = productRepository.findById(1L).get();
+        Optional<Product> product1 = productRepository.findById(1L);
 
-        Assert.assertEquals(product1, product);
+        Assert.assertEquals(product1, Optional.of(product));
     }
 
     @Test
@@ -55,9 +57,9 @@ public class ProductEnd2EndTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        Product product1 = productRepository.findById(1L).get();
+        Optional<Product> product1 = productRepository.findById(1L);
 
-        Assert.assertEquals(product1, product);
+        Assert.assertEquals(product1, Optional.of(product));
     }
 
     @Test
