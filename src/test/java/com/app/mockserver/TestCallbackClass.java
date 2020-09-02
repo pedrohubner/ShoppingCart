@@ -1,4 +1,4 @@
-package com.app.integration.product.mockserver;
+package com.app.mockserver;
 
 import org.mockserver.mock.action.ExpectationResponseCallback;
 import org.mockserver.model.HttpRequest;
