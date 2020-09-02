@@ -1,4 +1,4 @@
-package com.app.integration.product.mockserver;
+package com.app.mockserver;
 
 import com.app.product.models.Product;
 import com.fasterxml.jackson.databind.ObjectMapper;
