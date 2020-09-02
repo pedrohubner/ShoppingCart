@@ -8,10 +8,12 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -26,7 +28,7 @@ public class ProductControllerTest {
     @Autowired
     ObjectMapper mapper;
 
-    @Autowired
+    @MockBean
     AppFacade appFacade;
 
     @Test
@@ -43,7 +45,7 @@ public class ProductControllerTest {
     public void when_Id_Passed_asParam_Find_Product_byId_ifExists() throws Exception {
         Product product = new Product();
 
-        appFacade.createProduct(product);
+        when(appFacade.createProduct(product)).thenReturn(product);
 
         mockMvc.perform(get("/products/{id}", 1L))
                 .andExpect(status().isOk());
