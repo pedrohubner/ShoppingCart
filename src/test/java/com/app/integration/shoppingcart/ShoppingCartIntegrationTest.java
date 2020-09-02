@@ -26,19 +26,6 @@ public class ShoppingCartIntegrationTest {
         Assert.assertEquals(found, response);
     }
 
-    @Test
-    public void whenFindById_shouldReturnProduct() {
-        ShoppingCart response = ShoppingCart.builder()
-                .id(1L)
-                .build();
-
-        shoppingCartService.createShoppingCart(response);
-
-        ShoppingCart found = shoppingCartService.findShoppingCartById(1L);
-
-        Assert.assertEquals(found, response);
-    }
-
     @Test(expected = ApiException.class)
     public void repository_Should_Delete_ShoppingCart_When_Find_By_Id() {
         ShoppingCart response = ShoppingCart.builder()
