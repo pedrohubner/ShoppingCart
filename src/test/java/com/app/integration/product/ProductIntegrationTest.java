@@ -18,21 +18,21 @@ public class ProductIntegrationTest {
     ProductService productService;
 
     @Test
-    public void repository_Should_Save_Product() {
+    public void repositoryShouldSaveProduct() {
         Product response = new Product();
 
-        Product found = productService.createProduct(response);
+        Product found = productService.savingProductInMemory(response);
 
         Assert.assertEquals(found, response);
     }
 
     @Test
-    public void when_Find_By_Id_Repository_Should_Return_Product() {
+    public void whenFindByIdRepositoryShouldReturnProduct() {
         Product response = Product.builder()
                 .id(1L)
                 .build();
 
-        productService.createProduct(response);
+        productService.savingProductInMemory(response);
 
         Product found = productService.findProductById(1L);
 
@@ -40,12 +40,12 @@ public class ProductIntegrationTest {
     }
 
     @Test(expected = ApiException.class)
-    public void repository_Should_Delete_Product_When_Find_By_Id() {
+    public void repositoryShouldDeleteProductWhenFindById() {
         Product response = Product.builder()
                 .id(1L)
                 .build();
 
-        productService.createProduct(response);
+        productService.savingProductInMemory(response);
 
         productService.deleteProductById(1L);
 

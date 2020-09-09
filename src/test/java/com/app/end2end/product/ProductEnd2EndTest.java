@@ -33,7 +33,7 @@ public class ProductEnd2EndTest {
     ProductRepository productRepository;
 
     @Test
-    public void should_Return_Product_When_Repository_Saves_Product_In_H2() throws Exception {
+    public void shouldReturnProductWhenRepositorySavesProductInH2() throws Exception {
         Product product = new Product(1L, "Dorflex", 15., 12);
 
         mockMvc.perform(post("/products")
@@ -47,7 +47,7 @@ public class ProductEnd2EndTest {
     }
 
     @Test
-    public void should_Return_Product_When_Repository_Finds_Product_By_Id() throws Exception {
+    public void shouldReturnProductWhenRepositoryFindsProductById() throws Exception {
         Product product = new Product(1L, "Dorflex", 15., 12);
 
         productRepository.save(product);
@@ -63,7 +63,7 @@ public class ProductEnd2EndTest {
     }
 
     @Test
-    public void should_Delete_Product_When_Repository_Finds_Product_By_Id() throws Exception {
+    public void shouldDeleteProductWhenRepositoryFindsProductById() throws Exception {
         Product product = new Product(1L, "Azitromicina", 24., 21);
 
         productRepository.save(product);

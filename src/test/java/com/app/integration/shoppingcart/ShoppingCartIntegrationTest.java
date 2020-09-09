@@ -18,7 +18,7 @@ public class ShoppingCartIntegrationTest {
     ShoppingCartService shoppingCartService;
 
     @Test
-    public void repository_Should_Save_ShoppingCart() {
+    public void repositoryShouldSaveShoppingCart() {
         ShoppingCart response = new ShoppingCart();
 
         ShoppingCart found = shoppingCartService.createShoppingCart(response);
@@ -27,7 +27,7 @@ public class ShoppingCartIntegrationTest {
     }
 
     @Test(expected = ApiException.class)
-    public void repository_Should_Delete_ShoppingCart_When_Find_By_Id() {
+    public void repositoryShouldDeleteShoppingCartWhenFindById() {
         ShoppingCart response = ShoppingCart.builder()
                 .id(1L)
                 .build();

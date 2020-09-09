@@ -2,6 +2,7 @@ package com.app.product.controllers;
 
 import com.app.facade.AppFacade;
 import com.app.product.models.Product;
+import com.app.product.models.ProductDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +13,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.List;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -38,7 +41,7 @@ public class ProductControllerTest {
 
         String parsed = new ObjectMapper().writeValueAsString(product);
 
-        when(appFacade.createProduct(product)).thenReturn(product);
+        when(appFacade.savingProductInMemory(product)).thenReturn(product);
 
         mockMvc.perform(post("/products")
                 .content(mapper.writeValueAsString(product))
@@ -61,22 +64,31 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void should_Return_ProductDTO_List() throws Exception {
+    public void shouldReturnProductDTOList() throws Exception {
+        ProductDTO productDto = new ProductDTO();
+
+        String parsedStringToJson = new ObjectMapper().writeValueAsString(productDto);
+
+        List<String> productDtoList = List.of(parsedStringToJson);
+
+        when(appFacade.getDTOProductList()).thenReturn(List.of(productDto));
+
         mockMvc.perform(get("/products/tst"))
+                .andExpect(content().json(String.valueOf(productDtoList)))
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void should_Delete_All_Products_inMemory() throws Exception {
+    public void shouldDeleteAllProductsInMemory() throws Exception {
         mockMvc.perform(delete("/products"))
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void should_Delete_Products_byId_ifProductExists() throws Exception {
+    public void shouldDeleteProductsByIdIfProductExists() throws Exception {
         Product product = new Product();
 
-        appFacade.createProduct(product);
+        appFacade.savingProductInMemory(product);
 
         mockMvc.perform(delete("/products/{id}", 1L))
                 .andExpect(status().isOk());

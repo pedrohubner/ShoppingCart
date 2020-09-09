@@ -13,7 +13,7 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
-    public Product createProduct(Product product) {
+    public Product savingProductInMemory(Product product) {
         return productRepository.save(product);
     }
 

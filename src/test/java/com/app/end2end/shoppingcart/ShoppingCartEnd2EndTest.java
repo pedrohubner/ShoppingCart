@@ -29,7 +29,7 @@ public class ShoppingCartEnd2EndTest {
     ShoppingCartRepository shoppingCartRepository;
 
     @Test
-    public void should_Delete_Shopping_Cart_When_Repository_Finds_Cart_By_Id() throws Exception {
+    public void shouldDeleteShoppingCartWhenRepositoryFindsCartById() throws Exception {
         ShoppingCart shoppingCart = ShoppingCart.builder()
                 .id(1L)
                 .build();

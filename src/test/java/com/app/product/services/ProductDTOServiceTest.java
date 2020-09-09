@@ -24,7 +24,7 @@ public class ProductDTOServiceTest {
     ProductDTOService productDTOService;
 
     @Test
-    public void return_Product_Dto_List_When_Repository_Find_Product_List() {
+    public void returnProductDtoListWhenRepositoryFindProductList() {
         List<ProductDTO> productList2 = List.of(new ProductDTO());
 
         when(productRepository.findAll()).thenReturn(List.of(new Product()));

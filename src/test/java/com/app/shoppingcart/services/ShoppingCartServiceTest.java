@@ -24,7 +24,7 @@ public class ShoppingCartServiceTest {
     ShoppingCartService shoppingCartService;
 
     @Test
-    public void must_Return_New_Shopping_Cart_When_Repository_Saves_Shopping_Cart() {
+    public void mustReturnNewShoppingCartWhenRepositorySavesShoppingCart() {
         ShoppingCart shoppingCart = new ShoppingCart();
         when(shoppingCartRepository.save(shoppingCart)).thenReturn(shoppingCart);
         ShoppingCart shoppingCart1 = shoppingCartService.createShoppingCart(shoppingCart);
@@ -32,7 +32,7 @@ public class ShoppingCartServiceTest {
     }
 
     @Test
-    public void must_Return_A_Shopping_Cart_When_It_Returns_Full_Optional() {
+    public void mustReturnAShoppingCartWhenItReturnsFullOptional() {
         ShoppingCart shoppingCart = new ShoppingCart();
         when(shoppingCartRepository.findById(1L)).thenReturn(Optional.of(shoppingCart));
         ShoppingCart shoppingCart1 = shoppingCartService.findShoppingCartById(1L);
@@ -40,7 +40,7 @@ public class ShoppingCartServiceTest {
     }
 
     @Test(expected = ApiException.class)
-    public void must_Throw_Exception__When_It_Returns_Empty_Optional() {
+    public void mustThrowExceptionWhenItReturnsEmptyOptional() {
         when(shoppingCartRepository.findById(1L)).thenReturn(Optional.empty());
         shoppingCartService.findShoppingCartById(1L);
     }

@@ -24,8 +24,8 @@ public class AppFacade {
     private final ShoppingCartRepository shoppingCartRepository;
     private final ShoppingCartDTOService shoppingCartDTOService;
 
-    public Product createProduct(Product product) {
-        return productService.createProduct(product);
+    public Product savingProductInMemory(Product product) {
+        return productService.savingProductInMemory(product);
     }
 
     public Product findProductById(Long id) {

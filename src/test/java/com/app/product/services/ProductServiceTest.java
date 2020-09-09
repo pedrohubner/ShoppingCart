@@ -24,15 +24,15 @@ public class ProductServiceTest {
     ProductService productService;
 
     @Test
-    public void must_Return_New_Product_When_Repository_Saves_Product() {
+    public void mustReturnNewProductWhenRepositorySavesProduct() {
         Product product = new Product();
         when(productRepository.save(product)).thenReturn(product);
-        Product product1 = productService.createProduct(product);
+        Product product1 = productService.savingProductInMemory(product);
         Assert.assertEquals(product, product1);
     }
 
     @Test
-    public void must_Return_A_Product_When_It_Returns_Full_Optional() {
+    public void mustReturnAProductWhenItReturnsFullOptional() {
         Product product = new Product();
         when(productRepository.findById(1L)).thenReturn(Optional.of(product));
         Product product1 = productService.findProductById(1L);
@@ -40,13 +40,13 @@ public class ProductServiceTest {
     }
 
     @Test(expected = ApiException.class)
-    public void must_Throw_An_Exception_When_It_Returns_An_Empty_Optional() {
+    public void mustThrowAnExceptionWhenItReturnsAnEmptyOptional() {
         when(productRepository.findById(1L)).thenReturn(Optional.empty());
         productService.findProductById(1L);
     }
 
     @Test
-    public void decrease_Product_Inventory_If_Inventory_Is_Bigger_Than_Zero(){
+    public void decreaseProductInventoryIfInventoryIsBiggerThan_Zero(){
         Product product = new Product(1L, "Eno", 1., 15);
         when(productRepository.findById(1L)).thenReturn(Optional.of(product));
         when(productRepository.save(product)).thenReturn(new Product());

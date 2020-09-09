@@ -21,7 +21,7 @@ public class ProductController {
     @PostMapping
     @ApiOperation(value = "Cria um novo objeto de Product.")
     public Product createProduct(@RequestBody Product product) {
-        return appFacade.createProduct(product);
+        return appFacade.savingProductInMemory(product);
     }
 
     @GetMapping(value = "/{id}")
