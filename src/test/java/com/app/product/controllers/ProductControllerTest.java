@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -32,22 +33,30 @@ public class ProductControllerTest {
     AppFacade appFacade;
 
     @Test
-    public void when_Body_Passed_asParam_Create_Product() throws Exception {
+    public void whenBodyPassedAsParamCreateProduct() throws Exception {
         Product product = new Product();
+
+        String parsed = new ObjectMapper().writeValueAsString(product);
+
+        when(appFacade.createProduct(product)).thenReturn(product);
 
         mockMvc.perform(post("/products")
                 .content(mapper.writeValueAsString(product))
                 .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().json(parsed))
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void when_Id_Passed_asParam_Find_Product_byId_ifExists() throws Exception {
+    public void whenIdPassedAsParamFindProductByIdIfExists() throws Exception {
         Product product = new Product();
 
-        when(appFacade.createProduct(product)).thenReturn(product);
+        String parsed = new ObjectMapper().writeValueAsString(product);
+
+        when(appFacade.findProductById(1L)).thenReturn(product);
 
         mockMvc.perform(get("/products/{id}", 1L))
+                .andExpect(content().json(parsed))
                 .andExpect(status().isOk());
     }
 
