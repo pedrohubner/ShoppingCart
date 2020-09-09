@@ -3,6 +3,7 @@ HELP.md
 build/
 gradlew.bat
 teste
+gradle.properties
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**
 !**/src/test/**
