@@ -12,10 +12,10 @@ version = '0.0.1-SNAPSHOT'
 
 sonarqube {
 	properties {
-		property "sonar.sonar_token", "ee66103ed8e102c97bfb52ff0ca5042349131db6"
 		property "sonar.projectKey", "test-do-pepe"
 		property "sonar.organization", "pedrohubner"
 		property "sonar.host.url", "https://sonarcloud.io"
+		property "sonar.coverage.jacoco.xmlReportPaths", "$buildDir/reports/jacoco/test/jacocoTestReport.xml"
 	}
 }
 
@@ -39,6 +39,15 @@ dependencies {
 	testImplementation('org.mock-server:mockserver-client-java:5.11.1')
 }
 
+jacocoTestReport {
+	dependsOn(test)
+	reports {
+		xml.enabled(true)
+		csv.enabled(false)
+	}
+}
+
 test {
 	useJUnitPlatform()
+	finalizedBy(jacocoTestReport)
 }
