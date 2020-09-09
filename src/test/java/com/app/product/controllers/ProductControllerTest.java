@@ -39,14 +39,14 @@ public class ProductControllerTest {
     public void whenBodyPassedAsParamCreateProduct() throws Exception {
         Product product = new Product();
 
-        String parsed = new ObjectMapper().writeValueAsString(product);
+        String parsedStringToJson = new ObjectMapper().writeValueAsString(product);
 
         when(appFacade.savingProductInMemory(product)).thenReturn(product);
 
         mockMvc.perform(post("/products")
                 .content(mapper.writeValueAsString(product))
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().json(parsed))
+                .andExpect(content().json(parsedStringToJson))
                 .andExpect(status().isOk());
     }
 
@@ -54,12 +54,12 @@ public class ProductControllerTest {
     public void whenIdPassedAsParamFindProductByIdIfExists() throws Exception {
         Product product = new Product();
 
-        String parsed = new ObjectMapper().writeValueAsString(product);
+        String parsedStringToJson = new ObjectMapper().writeValueAsString(product);
 
         when(appFacade.findProductById(1L)).thenReturn(product);
 
         mockMvc.perform(get("/products/{id}", 1L))
-                .andExpect(content().json(parsed))
+                .andExpect(content().json(parsedStringToJson))
                 .andExpect(status().isOk());
     }
 
