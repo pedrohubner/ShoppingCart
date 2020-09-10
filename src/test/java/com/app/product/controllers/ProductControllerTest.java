@@ -39,7 +39,7 @@ public class ProductControllerTest {
     public void whenBodyPassedAsParamCreateProduct() throws Exception {
         Product product = new Product();
 
-        String parsedStringToJson = new ObjectMapper().writeValueAsString(product);
+        String parsedStringToJson = mapper.writeValueAsString(product);
 
         when(appFacade.savingProductInMemory(product)).thenReturn(product);
 
@@ -54,7 +54,7 @@ public class ProductControllerTest {
     public void whenIdPassedAsParamFindProductByIdIfExists() throws Exception {
         Product product = new Product();
 
-        String parsedStringToJson = new ObjectMapper().writeValueAsString(product);
+        String parsedStringToJson = mapper.writeValueAsString(product);
 
         when(appFacade.findProductById(1L)).thenReturn(product);
 
@@ -67,7 +67,7 @@ public class ProductControllerTest {
     public void shouldReturnProductDTOList() throws Exception {
         ProductDTO productDto = new ProductDTO();
 
-        String parsedStringToJson = new ObjectMapper().writeValueAsString(productDto);
+        String parsedStringToJson = mapper.writeValueAsString(productDto);
 
         List<String> productDtoList = List.of(parsedStringToJson);
 
@@ -86,10 +86,6 @@ public class ProductControllerTest {
 
     @Test
     public void shouldDeleteProductsByIdIfProductExists() throws Exception {
-        Product product = new Product();
-
-        appFacade.savingProductInMemory(product);
-
         mockMvc.perform(delete("/products/{id}", 1L))
                 .andExpect(status().isOk());
     }
