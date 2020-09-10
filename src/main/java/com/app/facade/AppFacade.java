@@ -44,8 +44,8 @@ public class AppFacade {
         productService.deleteAllProducts();
     }
 
-    public ShoppingCart createShoppingCart(ShoppingCart shoppingCart) {
-        return shoppingCartService.createShoppingCart(shoppingCart);
+    public ShoppingCart saveShoppingCartInMemory(ShoppingCart shoppingCart) {
+        return shoppingCartService.saveShoppingCartInMemory(shoppingCart);
     }
 
     public ShoppingCart findShoppingCartById(Long id) {
