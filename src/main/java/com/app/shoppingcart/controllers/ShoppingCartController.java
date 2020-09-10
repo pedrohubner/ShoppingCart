@@ -20,8 +20,8 @@ public class ShoppingCartController {
 
     @PostMapping
     @ApiOperation(value = "Cria um novo objeto ShoppingCart.")
-    public ShoppingCart createCart(@RequestBody ShoppingCart shoppingCart) {
-        return appFacade.createShoppingCart(shoppingCart);
+    public ShoppingCart saveShoppingCartInMemory(@RequestBody ShoppingCart shoppingCart) {
+        return appFacade.saveShoppingCartInMemory(shoppingCart);
     }
 
     @GetMapping(value = "/{id}")
