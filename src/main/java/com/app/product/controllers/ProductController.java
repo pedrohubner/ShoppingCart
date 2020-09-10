@@ -20,7 +20,7 @@ public class ProductController {
 
     @PostMapping
     @ApiOperation(value = "Cria um novo objeto de Product.")
-    public Product createProduct(@RequestBody Product product) {
+    public Product saveProductInMemory(@RequestBody Product product) {
         return appFacade.savingProductInMemory(product);
     }
 
