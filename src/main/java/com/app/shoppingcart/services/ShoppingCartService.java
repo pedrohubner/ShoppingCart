@@ -13,7 +13,7 @@ public class ShoppingCartService {
 
     private final ShoppingCartRepository shoppingCartRepository;
 
-    public ShoppingCart createShoppingCart(ShoppingCart shoppingCart) {
+    public ShoppingCart saveShoppingCartInMemory(ShoppingCart shoppingCart) {
         return shoppingCartRepository.save(shoppingCart);
     }
 
