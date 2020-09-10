@@ -27,7 +27,7 @@ public class ShoppingCartServiceTest {
     public void mustReturnNewShoppingCartWhenRepositorySavesShoppingCart() {
         ShoppingCart shoppingCart = new ShoppingCart();
         when(shoppingCartRepository.save(shoppingCart)).thenReturn(shoppingCart);
-        ShoppingCart shoppingCart1 = shoppingCartService.createShoppingCart(shoppingCart);
+        ShoppingCart shoppingCart1 = shoppingCartService.saveShoppingCartInMemory(shoppingCart);
         Assert.assertEquals(shoppingCart, shoppingCart1);
     }
 

@@ -21,7 +21,7 @@ public class ShoppingCartIntegrationTest {
     public void repositoryShouldSaveShoppingCart() {
         ShoppingCart response = new ShoppingCart();
 
-        ShoppingCart found = shoppingCartService.createShoppingCart(response);
+        ShoppingCart found = shoppingCartService.saveShoppingCartInMemory(response);
 
         Assert.assertEquals(found, response);
     }
@@ -32,7 +32,7 @@ public class ShoppingCartIntegrationTest {
                 .id(1L)
                 .build();
 
-        shoppingCartService.createShoppingCart(response);
+        shoppingCartService.saveShoppingCartInMemory(response);
 
         shoppingCartService.deleteShoppingCartById(1L);
 
